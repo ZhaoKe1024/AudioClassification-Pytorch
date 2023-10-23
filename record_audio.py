@@ -4,7 +4,7 @@ from macls.utils.record import RecordAudio
 
 s = input('请输入你计划录音多少秒：')
 record_seconds = int(s)
-save_path = "dataset/save_audio/%s.wav" % str(int(time.time()*1000))
+save_path = "datasets/save_audio/%s.wav" % str(int(time.time()*1000))
 
 record_audio = RecordAudio()
 input(f"按下回车键开机录音，录音{record_seconds}秒中：")

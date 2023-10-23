@@ -117,10 +117,10 @@ def _group_frames(frames, num_samples=None):
         frame.pts = None  # Ignore timestamp check.
         fifo.write(frame)
 
-        if num_samples is not None and fifo.samples >= num_samples:
+        if num_samples is not None and fifo._samples >= num_samples:
             yield fifo.read()
 
-    if fifo.samples > 0:
+    if fifo._samples > 0:
         yield fifo.read()
 
 

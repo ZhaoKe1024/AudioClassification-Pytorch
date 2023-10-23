@@ -87,10 +87,10 @@ python create_data.py
 
 The resulting list looks like this, with the path to the audio followed by the tag for that audio, starting at 0, and separated by `\t`.
 ```shell
-dataset/UrbanSound8K/audio/fold2/104817-4-0-2.wav	4
-dataset/UrbanSound8K/audio/fold9/105029-7-2-5.wav	7
-dataset/UrbanSound8K/audio/fold3/107228-5-0-0.wav	5
-dataset/UrbanSound8K/audio/fold4/109711-3-2-4.wav	3
+datasets/UrbanSound8K/audio/fold2/104817-4-0-2.wav	4
+datasets/UrbanSound8K/audio/fold9/105029-7-2-5.wav	7
+datasets/UrbanSound8K/audio/fold3/107228-5-0-0.wav	5
+datasets/UrbanSound8K/audio/fold4/109711-3-2-4.wav	3
 ```
 
 # Change preprocessing methods
@@ -250,7 +250,7 @@ At the end of each training round, we can perform an evaluation, which will outp
 At the end of the training, we are given a model parameter file, and we use this model to predict the audio.
 
 ```shell
-python infer.py --audio_path=dataset/UrbanSound8K/audio/fold5/156634-5-2-5.wav
+python infer.py --audio_path=datasets/UrbanSound8K/audio/fold5/156634-5-2-5.wav
 ```
 
 # Other Functions

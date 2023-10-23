@@ -88,7 +88,7 @@ class MAClsTrainer(object):
                                                max_duration=self.configs.dataset_conf.max_duration,
                                                min_duration=self.configs.dataset_conf.min_duration,
                                                aug_conf=self.configs.dataset_conf.aug_conf,
-                                               sample_rate=self.configs.dataset_conf.sample_rate,
+                                               sample_rate=self.configs.dataset_conf._sample_rate,
                                                use_dB_normalization=self.configs.dataset_conf.use_dB_normalization,
                                                target_dB=self.configs.dataset_conf.target_dB,
                                                mode='train')
@@ -107,7 +107,7 @@ class MAClsTrainer(object):
                                           do_vad=self.configs.dataset_conf.do_vad,
                                           max_duration=self.configs.dataset_conf.eval_conf.max_duration,
                                           min_duration=self.configs.dataset_conf.min_duration,
-                                          sample_rate=self.configs.dataset_conf.sample_rate,
+                                          sample_rate=self.configs.dataset_conf._sample_rate,
                                           use_dB_normalization=self.configs.dataset_conf.use_dB_normalization,
                                           target_dB=self.configs.dataset_conf.target_dB,
                                           mode='eval')

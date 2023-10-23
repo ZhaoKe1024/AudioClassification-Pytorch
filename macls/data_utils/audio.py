@@ -170,7 +170,7 @@ class AudioSegment(object):
                 raise ValueError("能用不同的采样率连接片段")
             if type(seg) is not cls:
                 raise TypeError("只有相同类型的音频片段可以连接")
-        samples = np.concatenate([seg.samples for seg in segments])
+        samples = np.concatenate([seg._samples for seg in segments])
         return cls(samples, sample_rate)
 
     @classmethod
@@ -296,7 +296,8 @@ class AudioSegment(object):
         :raises ValueError: If the required gain to normalize the segment to
                             the target_db value exceeds max_gain_db.
         """
-        if -np.inf == self.rms_db: return
+        if -np.inf == self.rms_db:
+            return
         gain = target_db - self.rms_db
         if gain > max_gain_db:
             raise ValueError(

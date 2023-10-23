@@ -55,7 +55,8 @@ class CustomDataset(Dataset):
         # 分割音频路径和标签
         audio_path, label = self.lines[idx].strip().split('\t')
         # 读取音频
-        audio_segment = AudioSegment.from_file(audio_path)
+        audio_segment = AudioSegment.from_file(
+            "C:/Program Files (zk)/data/UrbanSound8K/UrbanSound8K/audio/" + audio_path)
         # 裁剪静音
         if self.do_vad:
             audio_segment.vad()
@@ -66,14 +67,14 @@ class CustomDataset(Dataset):
         # 重采样
         if audio_segment.sample_rate != self._target_sample_rate:
             audio_segment.resample(self._target_sample_rate)
-        # 音频增强
+        # # 音频增强
         if self.mode == 'train':
             audio_segment = self.augment_audio(audio_segment, **self.aug_conf)
         # decibel normalization
         if self._use_dB_normalization:
             audio_segment.normalize(target_db=self._target_dB)
-        # 裁剪需要的数据
-        audio_segment.crop(duration=self.max_duration, mode=self.mode)
+        # # 裁剪需要的数据
+        # audio_segment.crop(duration=self.max_duration, mode=self.mode)
         return np.array(audio_segment.samples, dtype=np.float32), np.array(int(label), dtype=np.int64)
 
     def __len__(self):
@@ -113,14 +114,15 @@ class CustomDataset(Dataset):
             # 读取噪声音频
             noise_segment = AudioSegment.slice_from_file(noise_path)
             # 如果噪声采样率不等于audio_segment的采样率，则重采样
-            if noise_segment.sample_rate != audio_segment.sample_rate:
-                noise_segment.resample(audio_segment.sample_rate)
+            if noise_segment.sample_rate != audio_segment._sample_rate:
+                noise_segment.resample(audio_segment._sample_rate)
             # 随机生成snr_dB的值
             snr_dB = random.uniform(min_snr_dB, max_snr_dB)
             # 如果噪声的长度小于audio_segment的长度，则将噪声的前面的部分填充噪声末尾补长
             if noise_segment.duration < audio_segment.duration:
                 diff_duration = audio_segment.num_samples - noise_segment.num_samples
-                noise_segment._samples = np.pad(noise_segment.samples, (0, diff_duration), 'wrap')
+                noise_segment.samples = np.pad(noise_segment.samples, (0, diff_duration), 'wrap')
             # 将噪声添加到audio_segment中，并将snr_dB调整到最小值和最大值之间
             audio_segment.add_noise(noise_segment, snr_dB)
         return audio_segment
+

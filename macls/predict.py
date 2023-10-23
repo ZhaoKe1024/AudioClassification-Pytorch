@@ -109,8 +109,8 @@ class MAClsPredictor:
         else:
             raise Exception(f'不支持该数据类型，当前数据类型为：{type(audio_data)}')
         # 重采样
-        if audio_segment.sample_rate != self.configs.dataset_conf.sample_rate:
-            audio_segment.resample(self.configs.dataset_conf.sample_rate)
+        if audio_segment.sample_rate != self.configs.dataset_conf._sample_rate:
+            audio_segment.resample(self.configs.dataset_conf._sample_rate)
         # decibel normalization
         if self.configs.dataset_conf.use_dB_normalization:
             audio_segment.normalize(target_db=self.configs.dataset_conf.target_dB)

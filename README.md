@@ -92,10 +92,10 @@ python create_data.py
 
 生成的列表是长这样的，前面是音频的路径，后面是该音频对应的标签，从0开始，路径和标签之间用`\t`隔开。
 ```shell
-dataset/UrbanSound8K/audio/fold2/104817-4-0-2.wav	4
-dataset/UrbanSound8K/audio/fold9/105029-7-2-5.wav	7
-dataset/UrbanSound8K/audio/fold3/107228-5-0-0.wav	5
-dataset/UrbanSound8K/audio/fold4/109711-3-2-4.wav	3
+datasets/UrbanSound8K/audio/fold2/104817-4-0-2.wav	4
+datasets/UrbanSound8K/audio/fold9/105029-7-2-5.wav	7
+datasets/UrbanSound8K/audio/fold3/107228-5-0-0.wav	5
+datasets/UrbanSound8K/audio/fold4/109711-3-2-4.wav	3
 ```
 
 # 修改预处理方法
@@ -254,7 +254,7 @@ Estimated Total Size (MB): 35.07
 在训练结束之后，我们得到了一个模型参数文件，我们使用这个模型预测音频。
 
 ```shell
-python infer.py --audio_path=dataset/UrbanSound8K/audio/fold5/156634-5-2-5.wav
+python infer.py --audio_path=datasets/UrbanSound8K/audio/fold5/156634-5-2-5.wav
 ```
 
 # 其他功能
